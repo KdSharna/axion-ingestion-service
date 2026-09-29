@@ -1,0 +1,24 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: axion-ingestion-service
+  namespace: axion
+spec:
+  selector:
+    matchLabels:
+      app: axion-ingestion-service
+  template:
+    metadata:
+      labels:
+        app: axion-ingestion-service
+    spec:
+      containers:
+      - name: axion-ingestion-service
+        image: akscon01.azurecr.io/axion-ingestion:v1
+        ports:
+        - containerPort: 8000
+        env:  
+        - name: DATABASE_URL
+          value:  "postgresql://axion:axion123@postgres:5432/axiondb"
+        
